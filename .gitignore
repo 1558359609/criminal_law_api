@@ -2,4 +2,4 @@
 *.gz
 build/
 **/__pycache__/
-
+.gitignore
