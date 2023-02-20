@@ -33,10 +33,39 @@ def getContentsAll():
     :return: a list of string
     '''
     return list(__df['article_content'].values)
+def getInfoByArticleCode(article_code:int,para_code:int=None,sub_article_code:int=None):
+    """
+    根据法条的标号获取法条的内容,可以筛选款号
+    :param article_code:第X条
+    :param para_code:第X款
+    :param sub_article_code:之X
+    :return:
+    """
+    content=__getInfoBycode(article_code,sub_article_code)['res']['article_content']
+    if para_code:
+        content=content.split('\n')
+        if len(content)>=para_code:
+            return content[para_code-1]
+        else:raise  Exception("index of para_code out of range 条款编号超出范围,{}/{}".format(para_code,len(content)))
+    else:return content
 
-def getInfoByArticleCode(article_code:int,article_sub_code:int=None):
+
+def getInfoByArticleName(article_name:str):
     '''
-    根据法条的标号获取法条的内容
+    根据案由（法条名称）获取法条的信息，需要严格写全案由名称，如“交通肇事罪;危险驾驶罪”。若匹配到多个则返回第一个内容
+    :param article_name: 案由（法条名称）
+    :return:info dict
+    '''
+    df_by_condition=__df[__df['article_name'].str.contains(f'{article_name}')]
+
+    if len(df_by_condition)==0:
+        return{'error':f'未查询到该案由：{article_name}'}
+    else:
+        return __get_info_dict_by_df(df_by_condition)#第一条的信息
+
+def __getInfoBycode(article_code:int,article_sub_code:int=None):
+    '''
+    根据法条的标号获取法条的内容,但是没有款号的筛选
     :param article_code: 法条的编号，如133
     :param article_sub_code: 子条的编号，如1代表着“之一”，默认为None
     :return:info dict
@@ -50,19 +79,6 @@ def getInfoByArticleCode(article_code:int,article_sub_code:int=None):
         return {'error':f'未查询到该法条{article_code}之{df_by_article}'}
     return __get_info_dict_by_df(df_by_article)
     # return {'code':200,'description':"description"}
-
-def getInfoByArticleName(article_name:str):
-    '''
-    根据案由（法条名称）获取法条的信息，需要严格写全案由名称，如“交通肇事罪;危险驾驶罪”。若匹配到多个则返回第一个内容
-    :param article_name: 案由（法条名称）
-    :return:info dict
-    '''
-    df_by_condition=__df[__df['article_name'].str.contains(f'{article_name}')]
-    if len(df_by_condition)==0:
-        return{'error':f'未查询到该案由：{article_name}'}
-    else:
-        return __get_info_dict_by_df(df_by_condition)#第一条的信息
-
 def __get_info_dict_by_df(df_one_item):
     '''
     通过df的一行数据处理成返回的dict
