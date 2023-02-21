@@ -12,7 +12,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="legal_documents_cn", # Replace with your own username
-    version="0.0.6",
+    version="0.0.8",
     author="dongyuwu omnilab",
     author_email="1558359609@qq.com",
     description="Chinese legal documents, you can get certain legal term content by the code of term and the code of term by its content",

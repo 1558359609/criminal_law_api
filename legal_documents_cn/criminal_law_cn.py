@@ -43,10 +43,13 @@ def getInfoByArticleCode(article_code:int,para_code:int=None,sub_article_code:in
     """
     content=__getInfoBycode(article_code,sub_article_code)['res']['article_content']
     if para_code:
-        content=content.split('\n')
+        content=content.split('。')
+        content=[item+"。" for item in content[:-1]]+[content[-1]]
+
         if len(content)>=para_code:
             return content[para_code-1]
-        else:raise  Exception("index of para_code out of range 条款编号超出范围,{}/{}".format(para_code,len(content)))
+        else:raise  Exception("index of para_code out of range 条款编号超出范围,article_code:{}, para_code:{}, sub_article_code:{}, total content num:{}".
+                              format(article_code,para_code,sub_article_code,len(content)))
     else:return content
 
 
