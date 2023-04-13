@@ -83,7 +83,6 @@ features_name='part_code part_name chapter_code chapter_name section_code sectio
 def get_criminal_dict(all_txt):
     # matchs_part=re.findall(r'第([一二三四五六七八九十]+?)编 ([\s\S].+?)([\s\S]+?)(?=第[一二三四五六七八九十]+?编 |$)',all_txt)
     criminal_law = {x: [] for x in features_name}
-
     matchs_part=re.finditer(r'第([一二三四五六七八九十]+?)编 ([\S]*)(\s*)([\s\S]+?)(?=\s第[一二三四五六七八九十]+?编 |$)',all_txt)
     for match_part in matchs_part:
         part_name=match_part.group(2)
@@ -160,7 +159,7 @@ with open('data/xingfa.txt', 'r', encoding='gbk') as txt:
     lines=txt.read()
     criminal_law=get_criminal_dict(lines)
     df_law=pd.DataFrame(criminal_law)
-    # df_law.to_excel('criminal_law.xlsx',encoding='utf_8_sig')
-    df_law.to_csv('criminal_law.csv',encoding='utf_8_sig',index=False)
+    df_law.to_excel('criminal_law_test.xlsx',encoding='utf_8_sig',index=False)
+    # df_law.to_csv('criminal_law.csv',encoding='utf_8_sig',index=False)
     # print(criminal_law)
     print('ok')

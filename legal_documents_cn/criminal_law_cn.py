@@ -41,10 +41,15 @@ def getInfoByArticleCode(article_code:int,para_code:int=None,sub_article_code:in
     :param sub_article_code:之X
     :return:
     """
-    content=__getInfoBycode(article_code,sub_article_code)['res']['article_content']
+    res=__getInfoBycode(article_code,sub_article_code)
+    #没有查询到
+    if 'res' not in res.keys():
+        return res
+
+    content=res ['res']['article_content']
     if para_code:
-        content=content.split('。')
-        content=[item+"。" for item in content[:-1]]+[content[-1]]
+        content=content.split('。\n')
+        content=[item+"。\n" for item in content[:-1]]+[content[-1]]
 
         if len(content)>=para_code:
             return content[para_code-1]
@@ -77,7 +82,7 @@ def __getInfoBycode(article_code:int,article_sub_code:int=None):
 
     df_by_article=__df[__df['article_code'] == article_code]
     if article_sub_code!=None:
-        df_by_article=df_by_article[__df['article_sub_code'] == article_sub_code]
+        df_by_article=df_by_article[df_by_article['article_sub_code'] == article_sub_code]
     if len(df_by_article)==0:
         return {'error':f'未查询到该法条{article_code}之{df_by_article}'}
     return __get_info_dict_by_df(df_by_article)
