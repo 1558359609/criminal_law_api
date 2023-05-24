@@ -20,7 +20,7 @@ pip install legal_documents_cn
 
 ```python
 from legal_documents_cn import criminal_law_cn as law
-law.getInfoByArticleCode(article_code=219,article_sub_code=1)
+law.getInfoByArticleCode(article_code=219,sub_article_code=1)
 #第二百一十九条之一
 
 ```
