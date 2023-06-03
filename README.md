@@ -1,7 +1,7 @@
 # Legal Documents CN 
 # criminal_law_cn《中华人民共和国刑法》数据查询功能包 /《刑法》数据查询接口
 
->[GitHub地址](https://github.com/1558359609/criminal_law_api)
+>[GitHub地址](https://github.com/1558359609/criminal_law_api) 如果觉得有用，就请帮我点个Star叭~！
 > 
 > [PyPI地址](https://pypi.org/project/legal-documents-cn/)
 
@@ -87,7 +87,7 @@ dict:
 ```
 
 # 更新说明
-- 2023-6-3: v0.0.12 修复刑法第101~109；199；201~209；301~309条款的相关功能。
+- 2023-6-3: v0.0.12 修复刑法第101 - 109；199；201 - 209；301 - 309条款的相关功能。
 - 2023-4-13:v0.0.11 修复已知BUG
 - 2023-2-27:v0.0.10 更新了款的内容提取BUG
 - 2023-2-21:v0.0.9 修复已知BUG
