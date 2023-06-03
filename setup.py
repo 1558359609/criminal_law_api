@@ -12,13 +12,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="legal_documents_cn", # Replace with your own username
-    version="0.0.11",
+    version="0.0.12",
     author="dongyuwu omnilab",
     author_email="1558359609@qq.com",
     description="Chinese legal documents, you can get certain legal term content by the code of term and the code of term by its content",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/",
+    url="https://github.com/1558359609/criminal_law_api",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

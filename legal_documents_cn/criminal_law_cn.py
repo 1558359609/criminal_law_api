@@ -139,3 +139,7 @@ def getInfoByContent(content,vague=False):
     return __get_info_dict_by_df(df_conditional)
 
 
+if __name__=='__main__':
+    res=getInfoByArticleCode(article_code=309)
+    print(res)
+  
